@@ -979,6 +979,7 @@ function SettingsPageContent() {
         apiUrl(
           `/api/v1/settings/tests/${activeService}/${payload.run_id}/events`,
         ),
+        { withCredentials: true },
       );
       eventSourceRef.current = source;
       source.onmessage = (event) => {

@@ -113,8 +113,10 @@ export function wsUrl(path: string): string {
 const AUTH_ENABLED = process.env.NEXT_PUBLIC_AUTH_ENABLED === "true";
 
 /**
- * Authenticated fetch wrapper. Behaves identically to `fetch` but automatically
- * redirects to /login when the backend returns 401 (expired / invalid token).
+ * Authenticated fetch wrapper for all DeepTutor backend HTTP calls.
+ * Always sends `credentials: "include"` so session cookies reach the API
+ * when the web UI and API run on different origins (e.g. :3782 vs :8001).
+ * Redirects to /login on 401 when auth is enabled.
  */
 export async function apiFetch(
   input: RequestInfo | URL,
